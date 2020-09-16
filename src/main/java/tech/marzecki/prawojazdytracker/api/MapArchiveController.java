@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.*;
 import tech.marzecki.prawojazdytracker.model.Lesson;
 import tech.marzecki.prawojazdytracker.service.LessonService;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -26,8 +27,8 @@ public class MapArchiveController {
         return lessonService.getAllDriversLessons(UUID.fromString(id));
     }
 
-    @PostMapping("/update")
-    public boolean updateLesson(String name, String driverId){
+    @PostMapping("/add")
+    public boolean addLesson(String name, String driverId){
         lessonService.insertLesson(name, UUID.fromString(driverId), new Date());
         return true;
     }

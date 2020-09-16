@@ -26,11 +26,10 @@ public class PostgresLessonDataAccessService implements LessonDAO{
     @Override
     public List<Lesson> getAllDriversLessons(UUID driverID) {
         final String query = String.format("SELECT * FROM lesson WHERE driverID = '%s'", driverID.toString());
-        System.out.println(query);
         return jdbcTemplate.query(query, (resultSet,i) ->{
             Date date = new Date();
             try {
-                date = new SimpleDateFormat("yyyy-mm-dd").parse(resultSet.getString("date"));
+                date = new SimpleDateFormat("yyyy-MM-dd").parse(resultSet.getString("date"));
             } catch (ParseException e) {
                 e.printStackTrace();
             }
@@ -44,6 +43,8 @@ public class PostgresLessonDataAccessService implements LessonDAO{
 
     @Override
     public int insertLesson(UUID id, String name, UUID driverId, Date date) {
-        return 0;
+        final String query = String.format("INSERT INTO lesson (id, name, driverId, date) VALUES ('%s','%s','%s','%s')", id.toString(), name, driverId.toString(), new SimpleDateFormat("yyyy-MM-dd").format(date));
+        jdbcTemplate.update(query);
+        return 1;
     }
 }

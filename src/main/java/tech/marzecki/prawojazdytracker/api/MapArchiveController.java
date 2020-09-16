@@ -35,7 +35,7 @@ public class MapArchiveController {
 
     @PostMapping("/update")
     public boolean updateLesson(UUID lessonId, float lng, float lat){
-        final String time = new SimpleDateFormat("HH:mm:ss").format(new Date()));
+        final String time = new SimpleDateFormat("HH:mm:ss").format(new Date());
         return true;
     }
 }

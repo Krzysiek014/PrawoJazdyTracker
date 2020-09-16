@@ -3,6 +3,7 @@ package tech.marzecki.prawojazdytracker.api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import tech.marzecki.prawojazdytracker.model.Lesson;
+import tech.marzecki.prawojazdytracker.service.LessonMapPositionService;
 import tech.marzecki.prawojazdytracker.service.LessonService;
 
 import java.text.SimpleDateFormat;
@@ -15,10 +16,12 @@ import java.util.UUID;
 public class MapArchiveController {
 
     final LessonService lessonService;
+    final LessonMapPositionService lessonMapPositionService;
 
     @Autowired
-    public MapArchiveController(LessonService lessonService) {
+    public MapArchiveController(LessonService lessonService, LessonMapPositionService lessonMapPositionService) {
         this.lessonService = lessonService;
+        this.lessonMapPositionService = lessonMapPositionService;
     }
 
 
@@ -34,8 +37,8 @@ public class MapArchiveController {
     }
 
     @PostMapping("/update")
-    public boolean updateLesson(UUID lessonId, float lng, float lat){
-        final String time = new SimpleDateFormat("HH:mm:ss").format(new Date());
+    public boolean updateLesson(String lessonId, float lng, float lat){
+        lessonMapPositionService.insertMapPosition(lng, lat, UUID.fromString(lessonId));
         return true;
     }
 }

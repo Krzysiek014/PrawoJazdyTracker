@@ -1,18 +1,28 @@
 package tech.marzecki.prawojazdytracker.api;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+import tech.marzecki.prawojazdytracker.model.Lesson;
+import tech.marzecki.prawojazdytracker.service.LessonService;
+
+import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/map")
 public class MapArchiveController {
 
-    @GetMapping("/all")
-    public String getAllLessons(){
-        // TODO implement method to get all lessons
-        return "OK";
+    final LessonService lessonService;
+
+    @Autowired
+    public MapArchiveController(LessonService lessonService) {
+        this.lessonService = lessonService;
+    }
+
+
+    @GetMapping("/all/{id}")
+    public List<Lesson> getAllLessons(@PathVariable("id") String id){
+        return lessonService.getAllDriversLessons(UUID.fromString(id));
     }
 
     @PostMapping("/update")

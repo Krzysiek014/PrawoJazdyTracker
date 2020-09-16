@@ -1,6 +1,9 @@
 package tech.marzecki.prawojazdytracker.dao;
 
+import tech.marzecki.prawojazdytracker.model.LessonMapPosition;
+
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 public interface LessonMapPositionDAO {
@@ -10,4 +13,6 @@ public interface LessonMapPositionDAO {
         final UUID id = UUID.randomUUID();
         return insertMapPosition(longitude, latitude, id, lessonId, new Date());
     };
+
+    List<LessonMapPosition> getLessonMapPoints(UUID lessonId);
 }

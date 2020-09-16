@@ -3,6 +3,7 @@ package tech.marzecki.prawojazdytracker.api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import tech.marzecki.prawojazdytracker.model.Lesson;
+import tech.marzecki.prawojazdytracker.model.LessonMapPosition;
 import tech.marzecki.prawojazdytracker.service.LessonMapPositionService;
 import tech.marzecki.prawojazdytracker.service.LessonService;
 
@@ -40,5 +41,10 @@ public class MapArchiveController {
     public boolean updateLesson(String lessonId, float lng, float lat){
         lessonMapPositionService.insertMapPosition(lng, lat, UUID.fromString(lessonId));
         return true;
+    }
+
+    @GetMapping("/lesson/{id}")
+    public List<LessonMapPosition> getLessonMapPoints(@PathVariable("id") String lessonId){
+        return lessonMapPositionService.getLessonMapPoints(UUID.fromString(lessonId));
     }
 }

@@ -32,4 +32,10 @@ public class MapArchiveController {
         lessonService.insertLesson(name, UUID.fromString(driverId), new Date());
         return true;
     }
+
+    @PostMapping("/update")
+    public boolean updateLesson(UUID lessonId, float lng, float lat){
+        final String time = new SimpleDateFormat("HH:mm:ss").format(new Date()));
+        return true;
+    }
 }

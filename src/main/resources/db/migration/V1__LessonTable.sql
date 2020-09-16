@@ -1,0 +1,6 @@
+CREATE TABLE lesson(
+    id UUID NOT NULL PRIMARY KEY,
+    name VARCHAR(200) NOT NULL,
+    driverId UUID NOT NULL,
+    date DATE NOT NULL
+)

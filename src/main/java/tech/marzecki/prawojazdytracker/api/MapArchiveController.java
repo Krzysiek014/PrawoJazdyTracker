@@ -18,6 +18,6 @@ public class MapArchiveController {
     @PostMapping("/update")
     public boolean updateLesson(){
         // TODO implement method to update lesson
-        return "OK";
+        return true;
     }
 }

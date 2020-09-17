@@ -12,6 +12,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
+import static tech.marzecki.prawojazdytracker.security.ApplicationUserRole.ADMIN;
+
 @Configuration
 @EnableWebSecurity
 public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
@@ -40,7 +42,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                 .builder()
                 .username("test")
                 .password(passwordEncoder.encode("test"))
-                .roles("ADMIN")
+                .roles(ADMIN.name())
                 .build();
         return new InMemoryUserDetailsManager(test);
     }

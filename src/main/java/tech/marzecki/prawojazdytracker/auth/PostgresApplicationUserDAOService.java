@@ -8,6 +8,7 @@ import tech.marzecki.prawojazdytracker.security.ApplicationUserRole;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Repository
 public class PostgresApplicationUserDAOService implements ApplicationUserDAO{
@@ -29,8 +30,8 @@ public class PostgresApplicationUserDAOService implements ApplicationUserDAO{
                 resultSet.getBoolean("isaccountnonexpired"),
                 resultSet.getBoolean("isaccountnonlocked"),
                 resultSet.getBoolean("iscredentialsnonexpired"),
-                resultSet.getBoolean("isenabled")
-        )));
+                resultSet.getBoolean("isenabled"),
+                UUID.fromString(resultSet.getString("id")))));
         return applicationUserList
                 .stream()
                 .filter(a -> a.getUsername().equals(username))

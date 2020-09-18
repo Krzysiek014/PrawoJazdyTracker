@@ -1,13 +1,14 @@
 package tech.marzecki.prawojazdytracker.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
+import tech.marzecki.prawojazdytracker.auth.ApplicationUser;
 import tech.marzecki.prawojazdytracker.model.Lesson;
 import tech.marzecki.prawojazdytracker.model.LessonMapPosition;
 import tech.marzecki.prawojazdytracker.service.LessonMapPositionService;
 import tech.marzecki.prawojazdytracker.service.LessonService;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -26,14 +27,21 @@ public class MapArchiveController {
     }
 
 
-    @GetMapping("/all/{id}")
-    public List<Lesson> getAllLessons(@PathVariable("id") String id){
+    @GetMapping("lessons")
+    public List<Lesson> getUserLessons(){
+        final ApplicationUser auth = (ApplicationUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return lessonService.getAllDriversLessons(auth.getId());
+    }
+
+    @GetMapping("lessons/{id}")
+    public List<Lesson> getOtherUsersLessons(@PathVariable("id") String id){
         return lessonService.getAllDriversLessons(UUID.fromString(id));
     }
 
     @PostMapping("/add")
-    public boolean addLesson(String name, String driverId){
-        lessonService.insertLesson(name, UUID.fromString(driverId), new Date());
+    public boolean addLesson(String name){
+        final ApplicationUser auth = (ApplicationUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        lessonService.insertLesson(name, auth.getId(), new Date());
         return true;
     }
 

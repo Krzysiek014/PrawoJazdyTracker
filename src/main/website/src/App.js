@@ -1,12 +1,18 @@
 import React from 'react';
 import logo from './logo.svg';
+import loginBG from './login.jpg';
 import NavigationBar from './components/NavigationBar';
 import './App.css';
+import LoginContainer from './components/Login';
 function App() {
+  document.body.style.overflow = 'hidden';
   return (
-    <NavigationBar>
-      
-    </NavigationBar>
+    <div >
+      <NavigationBar>
+      </NavigationBar>
+      <img src={loginBG} style={{maxWidth: "100%"}}></img>
+      <LoginContainer></LoginContainer>
+    </div>
   );
 }
 

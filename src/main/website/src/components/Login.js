@@ -9,7 +9,7 @@ import TextField from "@material-ui/core/TextField";
 const LoginContainer = () => {
     return (
         <Card style={{minWidth: '250px', top: '50%', transform: 'translateY(-50%)', position: 'absolute', right: '10%', opacity: '75%', display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
-            <form action="localhost:8080/login" method="POST">
+            <form action="/login" method="POST">
                 <CardContent>
                     <Typography variant='h6' style={{textAlign: 'center'}}>
                         LOGOWANIE

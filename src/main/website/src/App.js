@@ -10,7 +10,7 @@ function App() {
     <div >
       <NavigationBar>
       </NavigationBar>
-      <img src={loginBG} style={{maxWidth: "100%"}}></img>
+      <img src={loginBG} style={{height: "-webkit-fill-available"}}></img>
       <LoginContainer></LoginContainer>
     </div>
   );

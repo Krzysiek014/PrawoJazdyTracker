@@ -15,7 +15,7 @@ ReactDOM.render(
   (
   <BrowserRouter>
     <Switch>
-      <Route path="/website/index.html" component={App}/>
+      <Route path="/website/login/index.html" component={App}/>
       <Route path="/website/home" component={HomePage}/>
     </Switch>
   </BrowserRouter>),

@@ -19,10 +19,10 @@ const NavigationBar = ({firstTime}) => {
                             Prawo Jazdy Tracker
                         </Typography>
                         <ButtonGroup color="primary" aria-label="secondary button group">
-                            <Button variant='contained' href="/rejestracja">
+                            <Button variant='contained' href="/website/register/index.html">
                                 Rejestracja
                             </Button>
-                            <Button variant='contained' href="/logowanie">
+                            <Button variant='contained' href="/website/login/index.html">
                                 Logowanie
                             </Button>
                         </ButtonGroup>

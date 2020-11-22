@@ -32,16 +32,16 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers(
                         HttpMethod.GET,
-                        "/index*", "/static/**", "/*.js", "/*.json", "/*.ico")
+                        "/website/index.html", "/static/**", "/*.js", "/*.json", "/*.ico")
                 .permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()
                 .formLogin()
-                .loginPage("/index.html")
+                .loginPage("/website/index.html")
                 .loginProcessingUrl("/login")
-                .defaultSuccessUrl("/map/lessons", true)
-                .failureUrl("/index.html?error=true");
+                .defaultSuccessUrl("/website/home/index.html", true)
+                .failureUrl("/website/index.html?error=true");
     }
 
 //    @Override

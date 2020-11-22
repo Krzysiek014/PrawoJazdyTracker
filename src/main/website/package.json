@@ -8,9 +8,18 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
+    "canvas": "^2.6.1",
+    "node-sass": "^5.0.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-scripts": "3.4.3"
+    "react-router": "^5.2.0",
+    "react-scripts": "^4.0.0",
+    "sass-loader": "^10.1.0",
+    "ts-node": "^9.0.0",
+    "type-fest": "^0.13.1",
+    "typescript": "^3.2.1",
+    "webpack-hot-middleware": "^2.0.2",
+    "webpack-plugin-serve": "^1.0.1"
   },
   "scripts": {
     "start": "react-scripts start",

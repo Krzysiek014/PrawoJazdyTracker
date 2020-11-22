@@ -3,17 +3,15 @@ import logo from './logo.svg';
 import loginBG from './login.jpg';
 import NavigationBar from './components/NavigationBar';
 import './App.css';
-import LoginContainer from './components/Login';
-function App() {
+function HomePage() {
   document.body.style.overflow = 'hidden';
   return (
     <div >
-      <NavigationBar firstTime = {true}>
+      <NavigationBar firstTime={false}>
       </NavigationBar>
       <img src={loginBG} style={{height: "-webkit-fill-available"}}></img>
-      <LoginContainer></LoginContainer>
     </div>
   );
 }
 
-export default App;
+export default HomePage;

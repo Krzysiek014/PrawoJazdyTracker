@@ -5,22 +5,64 @@ import NavigationBar from './components/NavigationBar';
 import './App.css';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
-import MapContainer from './components/MapCard';
+import MapCardContainer from './components/MapCard';
+import { makeStyles } from "@material-ui/core/styles";
+
+const useStyles = makeStyles((theme) => ({
+  grid: {
+    marginTop: "10px",
+  }
+}));
 
 function HomePage() {
-  document.body.style.overflow = 'hidden';
+  const classes = useStyles();
+  // document.body.style.overflow = 'hidden';
   return (
     <div >
       <NavigationBar firstTime={false}>
       </NavigationBar>
-      <Grid container spacing={2}>
+      <Grid container spacing={2} className={classes.grid}>
         <Grid item xs={2}>
             <Paper></Paper>
         </Grid>
         <Grid item xs={10}>
-            <Paper>
-              <MapContainer></MapContainer>
-            </Paper>
+          <Grid container spacing={2}>
+            <Grid item>
+              <Paper>
+                <MapCardContainer></MapCardContainer>
+              </Paper>
+            </Grid>
+            <Grid item>
+              <Paper>
+                <MapCardContainer></MapCardContainer>
+              </Paper>
+            </Grid>
+            <Grid item>
+              <Paper>
+                <MapCardContainer></MapCardContainer>
+              </Paper>
+            </Grid>
+            <Grid item>
+              <Paper>
+                <MapCardContainer></MapCardContainer>
+              </Paper>
+            </Grid>
+            <Grid item>
+              <Paper>
+                <MapCardContainer></MapCardContainer>
+              </Paper>
+            </Grid>
+            <Grid item>
+              <Paper>
+                <MapCardContainer></MapCardContainer>
+              </Paper>
+            </Grid>
+            <Grid item>
+              <Paper>
+                <MapCardContainer></MapCardContainer>
+              </Paper>
+            </Grid>
+          </Grid>
         </Grid>
       </Grid>
     </div>

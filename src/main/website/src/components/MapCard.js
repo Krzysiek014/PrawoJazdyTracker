@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
         width: '600px'
     },
   }));
-const MapCardContainer = () => {
+const MapCardContainer = ({name, date}) => {
    const classes = useStyles();
     return (
         <Card className={classes.card}>
@@ -29,11 +29,11 @@ const MapCardContainer = () => {
             <CardHeader
                 avatar={
                     <Avatar>
-                        T
+                        {name.substring(0,2)}
                     </Avatar>
                 }
-                title="TEST USER"
-                subheader="30.11.2020"
+                title={name}
+                subheader={date}
 
             />
             <CardMedia>

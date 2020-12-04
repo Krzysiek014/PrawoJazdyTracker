@@ -44,6 +44,7 @@ const MapCardContainer = ({id, name, date}) => {
     };
 
     const deleteLesson = () =>{
+        fetch("/map/lesson/delete/" + id)
         handleClose();
     }
 

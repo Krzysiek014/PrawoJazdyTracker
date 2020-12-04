@@ -30,7 +30,6 @@ function HomePage() {
     .then(res => res.json())
     .then(
       (result) => {
-          // console.log(moment(new Date(result[0].date)).fromNow())
           setData(result)
       }
     ).catch(e => setError(e))

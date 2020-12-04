@@ -30,6 +30,7 @@ function HomePage() {
     .then(res => res.json())
     .then(
       (result) => {
+          // console.log(moment(new Date(result[0].date)).fromNow())
           setData(result)
       }
     ).catch(e => setError(e))
@@ -51,12 +52,12 @@ function HomePage() {
               : data.map(i =>(
                 <Grid item>
                   <Paper>
-                    <MapCardContainer name={i.name} date={moment(new Date(i.date)).format('DD.MM.YYYY')}></MapCardContainer>
+                    <MapCardContainer id={i.id} name={i.name} date={moment(new Date(i.date)).format('DD.MM.YYYY')}></MapCardContainer>
                   </Paper>
                 </Grid>
                 ))
             }
-            <Grid item>
+            {/* <Grid item>
               <Paper>
                 <MapCardContainer name={"TEST"}></MapCardContainer>
               </Paper>
@@ -90,7 +91,7 @@ function HomePage() {
               <Paper>
                 <MapCardContainer name={"TEST"}></MapCardContainer>
               </Paper>
-            </Grid>
+            </Grid> */}
           </Grid>
         </Grid>
       </Grid>

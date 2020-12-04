@@ -24,6 +24,10 @@ public class LessonService {
         return lessonDAO.insertLesson(name, driverId, date);
     }
 
+    public int deleteLesson(UUID lessonId){
+        return lessonDAO.deleteLesson(lessonId);
+    }
+
     public List<Lesson> getAllDriversLessons(UUID driverID){
         return lessonDAO.getAllDriversLessons(driverID);
     }

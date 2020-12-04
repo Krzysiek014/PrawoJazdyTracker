@@ -17,5 +17,6 @@ public interface LessonDAO {
         return insertLesson(id, name, driverId, date);
 
     }
+    int deleteLesson(UUID id);
 
 }

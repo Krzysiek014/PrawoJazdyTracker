@@ -55,4 +55,9 @@ public class MapArchiveController {
     public List<LessonMapPosition> getLessonMapPoints(@PathVariable("id") String lessonId){
         return lessonMapPositionService.getLessonMapPoints(UUID.fromString(lessonId));
     }
+
+    @GetMapping("/lesson/delete/{id}")
+    public int deleteUsersLesson(@PathVariable("id") String id){
+        return lessonService.deleteLesson(UUID.fromString(id));
+    }
 }

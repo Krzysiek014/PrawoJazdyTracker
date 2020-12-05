@@ -17,7 +17,7 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 
-const position = [52.25, 21.00]
+// const position = [52.25, 21.00]
 const useStyles = makeStyles((theme) => ({
     map: {
       width: "600px",
@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
 const MapCardContainer = ({id, name, date}) => {
    const classes = useStyles();
    const [data, setData] = useState(null)
-//    const [positionCenter, setData] = useState(null)
+   const [positionCenter, setPosition] = useState(null)
    const [loading, setLoading] = useState(true)
    const [error, setError] = useState(null)
    const [anchorEl, setAnchorEl] = React.useState(null);
@@ -48,40 +48,27 @@ const MapCardContainer = ({id, name, date}) => {
         handleClose();
     }
 
-   console.log(id)
    useEffect(() => {
      fetch("/map/lesson/" + id)
      .then(res => res.json())
      .then(
        (result) => {
-        //    position = [0,0] 
+           const position = [0,0];
            const route = [];
            for (let i = 0; i < result.length - 1; i++) {
-            //    postion[0]
-               const segment = [
+                position[0] += result[i].latitude;
+                position[1] += result[i].longitude;
+                const segment = [
                    [result[i].latitude, result[i].longitude],
                    [result[i+1].latitude, result[i+1].longitude]
-               ]
-               console.log(segment)
-               route.push(segment)
+                ]
+                route.push(segment)
            }
-           setData(route)
-           /*
-           [
-             {
-                 id: 1,
-                 name: 'asd'
-             },
-             {
-                 id: 2,
-                 name: 'Qwe'
-             },
-             {
-                 id: 3,
-                 name: "element z result"
-             }
-            ]
-           */
+           position[0] /= result.length-1;
+           position[1] /= result.length-1;
+           setPosition(position);
+
+           setData(route);
        }
      ).catch(e => setError(e))
      .finally(() => setLoading(false))
@@ -116,18 +103,20 @@ const MapCardContainer = ({id, name, date}) => {
                   }
             />
             <CardMedia>
-                <MapContainer center={position} zoom={11} className={classes.map}>
-                        <TileLayer
-                        attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-                        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                        />
                         {error ? <Typography>Wystąpił błąd: {error}</Typography>
                         : loading ? <CircularProgress />
-                        : data.map((result, index) => {
-                                return <Polyline key={index} positions={result} color={'red'} />
-                            // : null
-                        })}
-                </MapContainer>
+                        : <MapContainer center={positionCenter} zoom={11} className={classes.map}>
+                                <TileLayer
+                                attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                                />
+                                {data.map((result, index) => {
+                                        // return <Polyline key={index} positions={result} color={rgb(index*256/(data.length-1),256-index*256/(data.length-1),0)} />
+                                        return <Polyline key={index} positions={result} color={'rgb(' + (index*255/(data.length-1)) + ',' + (255-index*255/(data.length-1)) + ',0)'} />
+                                    // : null
+                                })}
+                        </MapContainer>
+                        }
             </CardMedia>
             <CardActions disableSpacing>
                 <IconButton aria-label="add to favorites">

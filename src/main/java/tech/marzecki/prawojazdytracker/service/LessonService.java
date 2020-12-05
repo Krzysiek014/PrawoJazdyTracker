@@ -31,4 +31,8 @@ public class LessonService {
     public List<Lesson> getAllDriversLessons(UUID driverID){
         return lessonDAO.getAllDriversLessons(driverID);
     }
+
+    public int deleteAllLessons(UUID id){
+        return lessonDAO.deleteAllLessons(id);
+    }
 }

@@ -3,6 +3,7 @@ package tech.marzecki.prawojazdytracker.api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.view.RedirectView;
 import tech.marzecki.prawojazdytracker.auth.ApplicationUser;
 import tech.marzecki.prawojazdytracker.model.Lesson;
 import tech.marzecki.prawojazdytracker.model.LessonMapPosition;
@@ -59,5 +60,12 @@ public class MapArchiveController {
     @GetMapping("/lesson/delete/{id}")
     public int deleteUsersLesson(@PathVariable("id") String id){
         return lessonService.deleteLesson(UUID.fromString(id));
+    }
+
+    @GetMapping("/lesson/deleteAll")
+    public RedirectView deleteAllLessons(){
+        final ApplicationUser auth = (ApplicationUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        lessonService.deleteAllLessons(auth.getId());
+        return new RedirectView("/website/home/index.html");
     }
 }

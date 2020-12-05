@@ -54,4 +54,11 @@ public class PostgresLessonDataAccessService implements LessonDAO{
         jdbcTemplate.update(query);
         return 1;
     }
+
+    @Override
+    public int deleteAllLessons(UUID id) {
+        final String query = String.format("DELETE FROM lesson WHERE driverid = '%s'", id.toString());
+        jdbcTemplate.update(query);
+        return 1;
+    }
 }

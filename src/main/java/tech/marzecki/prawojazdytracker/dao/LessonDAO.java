@@ -19,4 +19,6 @@ public interface LessonDAO {
     }
     int deleteLesson(UUID id);
 
+    int deleteAllLessons(UUID id);
+
 }

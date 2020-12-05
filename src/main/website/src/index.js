@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import Login from './Login';
+import Register from './Register';
 import HomePage from './HomePage';
 import * as serviceWorker from './serviceWorker';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
@@ -10,7 +11,8 @@ ReactDOM.render(
   (
   <BrowserRouter>
     <Switch>
-      <Route path="/website/login" component={App}/>
+      <Route path="/website/login" component={Login}/>
+      <Route path="/website/register" component={Register}/>
       <Route path="/website/home" component={HomePage}/>
     </Switch>
   </BrowserRouter>),

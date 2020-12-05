@@ -32,7 +32,9 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers(
                         HttpMethod.GET,
-                        "userApi/register", "/website/login/index.html", "/website/register/index.html", "/static/**", "/*.js", "/*.json", "/*.ico")
+                        "/website/login/index.html", "/website/register/index.html", "/static/**", "/*.js", "/*.json", "/*.ico")
+                .permitAll()
+                .antMatchers(HttpMethod.POST, "/userApi/register")
                 .permitAll()
                 .anyRequest()
                 .authenticated()

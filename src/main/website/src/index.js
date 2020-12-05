@@ -6,6 +6,7 @@ import Register from './Register';
 import HomePage from './HomePage';
 import * as serviceWorker from './serviceWorker';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
+import Settings from './Settings';
 
 ReactDOM.render(
   (
@@ -14,6 +15,7 @@ ReactDOM.render(
       <Route path="/website/login" component={Login}/>
       <Route path="/website/register" component={Register}/>
       <Route path="/website/home" component={HomePage}/>
+      <Route path="/website/settings" component={Settings}/>
     </Switch>
   </BrowserRouter>),
   document.getElementById('root')

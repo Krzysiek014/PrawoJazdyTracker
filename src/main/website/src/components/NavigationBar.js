@@ -40,6 +40,9 @@ const NavigationBar = ({firstTime}) => {
                             Prawo Jazdy Tracker
                         </Typography>
                         <ButtonGroup color="primary" aria-label="secondary button group">
+                            <Button variant='contained' href="/website/settings/index.html">
+                                Ustawienia
+                            </Button>
                             <Button variant='contained' href="/logout">
                                 Wyloguj
                             </Button>

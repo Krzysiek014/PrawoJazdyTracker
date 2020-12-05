@@ -20,4 +20,8 @@ public class ApplicationUserDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
         return applicationUserDAO.selectApplicationUserByUsername(s).orElseThrow(() -> new UsernameNotFoundException("Username not in DB"));
     }
+
+    public int registerUser(String username, String password) {
+        return applicationUserDAO.registerUser(username, password);
+    }
 }

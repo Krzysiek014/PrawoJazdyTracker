@@ -14,10 +14,12 @@ import java.util.UUID;
 public class PostgresApplicationUserDAOService implements ApplicationUserDAO{
 
     private final JdbcTemplate jdbcTemplate;
+    private final PasswordEncoder passwordEncoder;
 
     @Autowired
     public PostgresApplicationUserDAOService(JdbcTemplate jdbcTemplate, PasswordEncoder passwordEncoder) {
         this.jdbcTemplate = jdbcTemplate;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
@@ -36,5 +38,12 @@ public class PostgresApplicationUserDAOService implements ApplicationUserDAO{
                 .stream()
                 .filter(a -> a.getUsername().equals(username))
                 .findFirst();
+    }
+
+    @Override
+    public int registerUser(UUID id, String username, String password) {
+        String query = String.format("INSERT INTO users VALUES('%s', 'DRIVER', '%s', '%s', 1, 1, 1, 1)", id.toString(), username, passwordEncoder.encode(password));
+        jdbcTemplate.update(query);
+        return 1;
     }
 }

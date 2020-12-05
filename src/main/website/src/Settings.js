@@ -34,6 +34,9 @@ function Settings() {
         <Grid item xs={6}>
           <Paper elevation={3} className={classes.paper}>
             <Typography variant="h4" style={{textAlign: 'center'}}>Ustawienia</Typography>
+            <Button variant="contained" color="secondary" href="/map/lesson/deleteAll">
+              Usuń wszystkie lekcje
+            </Button>
             <Button variant="contained" color="secondary" href="/userApi/deleteAccount">
               Usuń konto
             </Button>

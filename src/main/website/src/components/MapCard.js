@@ -105,7 +105,7 @@ const MapCardContainer = ({id, name, date}) => {
             <CardMedia>
                         {error ? <Typography>Wystąpił błąd: {error}</Typography>
                         : loading ? <CircularProgress />
-                        : <MapContainer center={positionCenter} zoom={11} className={classes.map}>
+                        : <MapContainer center={positionCenter} zoom={13} className={classes.map}>
                                 <TileLayer
                                 attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

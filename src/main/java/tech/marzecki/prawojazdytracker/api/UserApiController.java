@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.view.RedirectView;
 import tech.marzecki.prawojazdytracker.auth.ApplicationUserDetailsService;
 
 @RestController
@@ -19,9 +20,8 @@ public class UserApiController {
     }
 
     @PostMapping("/register")
-    public boolean registerUser(String username, String password){
-        System.out.printf("tak");
+    public RedirectView registerUser(String username, String password){
         applicationUserDetailsService.registerUser(username, password);
-        return true;
+        return new RedirectView("/website/login/index.html");
     }
 }

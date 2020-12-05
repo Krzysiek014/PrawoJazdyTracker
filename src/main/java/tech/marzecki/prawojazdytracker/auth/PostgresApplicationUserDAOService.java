@@ -42,7 +42,7 @@ public class PostgresApplicationUserDAOService implements ApplicationUserDAO{
 
     @Override
     public int registerUser(UUID id, String username, String password) {
-        String query = String.format("INSERT INTO users VALUES('%s', 'DRIVER', '%s', '%s', 1, 1, 1, 1)", id.toString(), username, passwordEncoder.encode(password));
+        String query = String.format("INSERT INTO users VALUES('%s', 'DRIVER', '%s', '%s', true, true, true, true)", id.toString(), username, passwordEncoder.encode(password));
         jdbcTemplate.update(query);
         return 1;
     }

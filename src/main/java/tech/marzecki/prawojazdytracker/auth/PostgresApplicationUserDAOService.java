@@ -46,4 +46,11 @@ public class PostgresApplicationUserDAOService implements ApplicationUserDAO{
         jdbcTemplate.update(query);
         return 1;
     }
+
+    @Override
+    public int removeUser(UUID id) {
+        String query = String.format("DELETE FROM users WHERE id = '%s'", id.toString());
+        jdbcTemplate.update(query);
+        return 1;
+    }
 }

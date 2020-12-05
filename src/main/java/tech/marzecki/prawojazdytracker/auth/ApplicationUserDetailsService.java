@@ -6,6 +6,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.UUID;
+
 @Service
 public class ApplicationUserDetailsService implements UserDetailsService {
 
@@ -23,5 +25,9 @@ public class ApplicationUserDetailsService implements UserDetailsService {
 
     public int registerUser(String username, String password) {
         return applicationUserDAO.registerUser(username, password);
+    }
+
+    public int removeUser(UUID id){
+        return applicationUserDAO.removeUser(id);
     }
 }

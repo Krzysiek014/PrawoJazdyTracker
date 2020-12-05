@@ -14,4 +14,6 @@ public interface ApplicationUserDAO {
         return registerUser(id, username, password);
     }
 
+    int removeUser(UUID id);
+
 }

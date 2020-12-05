@@ -32,7 +32,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers(
                         HttpMethod.GET,
-                        "/website/login/index.html", "/static/**", "/*.js", "/*.json", "/*.ico")
+                        "userApi/register", "/website/login/index.html", "/website/register/index.html", "/static/**", "/*.js", "/*.json", "/*.ico")
                 .permitAll()
                 .anyRequest()
                 .authenticated()

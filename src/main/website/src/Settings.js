@@ -44,7 +44,7 @@ function Settings() {
   document.body.style.overflow = 'hidden';
   return (
     <div >
-      <NavigationBar firstTime = {true}>
+      <NavigationBar firstTime = {false}>
       </NavigationBar>
       <Grid container spacing={2} className={classes.grid}>
         <Grid item xs={3}>

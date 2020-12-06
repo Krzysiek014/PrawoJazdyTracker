@@ -24,13 +24,13 @@ public class UserApiController {
     @PostMapping("/register")
     public RedirectView registerUser(String username, String password){
         applicationUserDetailsService.registerUser(username, password);
-        return new RedirectView("/website/login/index.html");
+        return new RedirectView("/website/login/index.html?status=registration");
     }
 
     @GetMapping("/deleteAccount")
     public RedirectView removeUser(){
         final ApplicationUser auth = (ApplicationUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         applicationUserDetailsService.removeUser(auth.getId());
-        return new RedirectView("/website/login/index.html");
+        return new RedirectView("/website/login/index.html?status=delete");
     }
 }

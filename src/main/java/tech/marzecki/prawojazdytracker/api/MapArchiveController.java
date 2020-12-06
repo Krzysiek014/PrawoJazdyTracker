@@ -66,6 +66,6 @@ public class MapArchiveController {
     public RedirectView deleteAllLessons(){
         final ApplicationUser auth = (ApplicationUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         lessonService.deleteAllLessons(auth.getId());
-        return new RedirectView("/website/home/index.html");
+        return new RedirectView("/website/home/index.html?status=deleteAll");
     }
 }

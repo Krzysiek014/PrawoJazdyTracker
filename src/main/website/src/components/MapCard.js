@@ -49,7 +49,7 @@ const MapCardContainer = ({id, name, date}) => {
     }
 
    useEffect(() => {
-     fetch("/map/lesson/" + id)
+     fetch("/map/lesson/" + id + "/points")
      .then(res => res.json())
      .then(
        (result) => {

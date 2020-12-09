@@ -61,4 +61,22 @@ public class PostgresLessonDataAccessService implements LessonDAO{
         jdbcTemplate.update(query);
         return 1;
     }
+
+    @Override
+    public Lesson lessonDetails(UUID lessonID){
+        final String query = String.format("SELECT * FROM lesson WHERE id = '%s'", lessonID.toString());
+        return jdbcTemplate.query(query, (resultSet,i) ->{
+            Date date = new Date();
+            try {
+                date = new SimpleDateFormat("yyyy-MM-dd").parse(resultSet.getString("date"));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            return new Lesson(
+                    UUID.fromString(resultSet.getString("id")),
+                    resultSet.getString("name"),
+                    UUID.fromString(resultSet.getString("driverId")),
+                    date);
+        }).get(0);
+    }
 }

@@ -53,6 +53,11 @@ public class MapArchiveController {
     }
 
     @GetMapping("/lesson/{id}")
+    public Lesson getLessonDetails(@PathVariable("id") String lessonId){
+        return lessonService.getLessonDetails(UUID.fromString(lessonId));
+    }
+
+    @GetMapping("/lesson/{id}/points")
     public List<LessonMapPosition> getLessonMapPoints(@PathVariable("id") String lessonId){
         return lessonMapPositionService.getLessonMapPoints(UUID.fromString(lessonId));
     }

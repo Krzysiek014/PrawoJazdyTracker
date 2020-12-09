@@ -21,4 +21,5 @@ public interface LessonDAO {
 
     int deleteAllLessons(UUID id);
 
+    Lesson lessonDetails(UUID lessonID);
 }

@@ -35,4 +35,8 @@ public class LessonService {
     public int deleteAllLessons(UUID id){
         return lessonDAO.deleteAllLessons(id);
     }
+
+    public Lesson getLessonDetails(UUID lessonID){
+        return lessonDAO.lessonDetails(lessonID);
+    }
 }

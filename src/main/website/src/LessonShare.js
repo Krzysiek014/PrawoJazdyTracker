@@ -9,6 +9,7 @@ import moment from 'moment';
 import { Typography } from '@material-ui/core';
 import CircularProgress from '@material-ui/core/CircularProgress'
 
+
 const useStyles = makeStyles((theme) => ({
   grid: {
     marginTop: "10px",
@@ -35,16 +36,11 @@ function LessonShare() {
     <div >
       <NavigationBar firstTime={true}>
       </NavigationBar>
-      <Grid container spacing={2} className={classes.grid}>
-        <Grid item xs={2}>
-            <Paper></Paper>
-        </Grid>
-        <Grid item xs={10}>
+      <Grid container spacing={2} className={classes.grid} justify={'center'}>
+        <Grid item>
           {error ? <Typography>Wystąpił błąd: {error}</Typography>
           : loading ? <CircularProgress />
-          : <Paper>
-              <MapCardContainer id={data.id} name={data.name} date={moment(new Date(data.date)).format('DD.MM.YYYY')}></MapCardContainer>
-            </Paper>
+          : <MapCardContainer id={data.id} name={data.name} date={moment(new Date(data.date)).format('DD.MM.YYYY')}></MapCardContainer>
           }
         </Grid>
       </Grid>

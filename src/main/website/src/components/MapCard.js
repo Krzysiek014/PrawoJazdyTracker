@@ -16,15 +16,27 @@ import { SettingsRemote } from '@material-ui/icons';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
+import Button from '@material-ui/core/Button';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import TextField from "@material-ui/core/TextField";
 
 // const position = [52.25, 21.00]
 const useStyles = makeStyles((theme) => ({
     map: {
-      width: "600px",
-      height: "500px",
+        width: "600px",
+        height: "500px",
     },
     card:{
         width: '600px'
+    },
+    textField:{
+        marginLeft: '20px',
+        marginRight: '20px',
+        width: '550px'
     },
   }));
 const MapCardContainer = ({id, name, date}) => {
@@ -34,6 +46,7 @@ const MapCardContainer = ({id, name, date}) => {
    const [loading, setLoading] = useState(true)
    const [error, setError] = useState(null)
    const [anchorEl, setAnchorEl] = React.useState(null);
+   const [share, setShare] = React.useState(null);
   
    const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
@@ -47,6 +60,14 @@ const MapCardContainer = ({id, name, date}) => {
         fetch("/map/lesson/delete/" + id)
         handleClose();
     }
+
+    const shareOpen = () => {
+        setShare(true);
+    };
+
+    const shareClose = () => {
+        setShare(false);
+    };
 
    useEffect(() => {
      fetch("/map/lesson/" + id + "/points")
@@ -123,7 +144,23 @@ const MapCardContainer = ({id, name, date}) => {
                     <FavoriteIcon />
                 </IconButton>
                 <IconButton aria-label="share">
-                    <ShareIcon />
+                    <ShareIcon onClick={shareOpen}/>
+                    <Dialog
+                    open={share}
+                    onClose={shareClose}
+                    aria-labelledby="alert-dialog-title"
+                    aria-describedby="alert-dialog-description"
+                    >
+                        <DialogTitle id="alert-dialog-title">{'Link do udostępnienia'}</DialogTitle>
+                        <DialogContentText id="alert-dialog-description">
+                            <TextField className={classes.textField} id="outlined-basic" label="Outlined" variant="outlined" defaultValue={"localhost:8080/website/lesson/index.html?id=" + id}/>
+                        </DialogContentText>
+                        <DialogActions>
+                            <Button onClick={shareClose} color="primary" autoFocus>
+                                OK
+                            </Button>
+                        </DialogActions>
+                    </Dialog>
                 </IconButton>
             </CardActions>
         </Card>

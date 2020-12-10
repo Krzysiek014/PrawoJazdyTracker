@@ -64,11 +64,6 @@ const LoginContainer = () => {
               aria-describedby="alert-dialog-description"
             >
                 <DialogTitle id="alert-dialog-title">{message}</DialogTitle>
-                {/* <DialogContent>
-                    <DialogContentText id="alert-dialog-description">
-                        {message}
-                    </DialogContentText>
-                </DialogContent> */}
                 <DialogActions>
                     <Button onClick={handleClose} color="primary" autoFocus>
                         OK

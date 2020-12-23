@@ -52,7 +52,7 @@ function Profile() {
               : data.map(i =>(
                 <Grid item>
                   <Paper>
-                    <MapCardContainer id={i.id} name={i.name} date={moment(new Date(i.date)).format('DD.MM.YYYY')}></MapCardContainer>
+                    <MapCardContainer owner={false} id={i.id} name={i.name} date={moment(new Date(i.date)).format('DD.MM.YYYY')}></MapCardContainer>
                   </Paper>
                 </Grid>
                 ))

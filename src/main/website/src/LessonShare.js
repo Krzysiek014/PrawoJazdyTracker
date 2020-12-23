@@ -40,7 +40,7 @@ function LessonShare() {
         <Grid item>
           {error ? <Typography>Wystąpił błąd: {error}</Typography>
           : loading ? <CircularProgress />
-          : <MapCardContainer id={data.id} name={data.name} date={moment(new Date(data.date)).format('DD.MM.YYYY')}></MapCardContainer>
+          : <MapCardContainer owner={false} id={data.id} name={data.name} date={moment(new Date(data.date)).format('DD.MM.YYYY')}></MapCardContainer>
           }
         </Grid>
       </Grid>

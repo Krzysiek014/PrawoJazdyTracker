@@ -51,7 +51,7 @@ function HomePage() {
               : data.map(i =>(
                 <Grid item>
                   <Paper>
-                    <MapCardContainer id={i.id} name={i.name} date={moment(new Date(i.date)).format('DD.MM.YYYY')}></MapCardContainer>
+                    <MapCardContainer owner={true} id={i.id} name={i.name} date={moment(new Date(i.date)).format('DD.MM.YYYY')}></MapCardContainer>
                   </Paper>
                 </Grid>
                 ))

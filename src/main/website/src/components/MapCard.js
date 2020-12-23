@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
         width: '550px'
     },
   }));
-const MapCardContainer = ({id, name, date}) => {
+const MapCardContainer = ({id, name, date, owner}) => {
    const classes = useStyles();
    const [data, setData] = useState(null)
    const [positionCenter, setPosition] = useState(null)
@@ -107,6 +107,7 @@ const MapCardContainer = ({id, name, date}) => {
                 title={name}
                 subheader={date}
                 action={
+                    owner ?
                     <div>
                         <IconButton aria-label="settings" onClick={handleClick}>
                             <MoreVertIcon />
@@ -121,7 +122,8 @@ const MapCardContainer = ({id, name, date}) => {
                             <MenuItem onClick={deleteLesson}>Usuń lekcję</MenuItem>
                         </Menu>
                     </div>
-                  }
+                    : null
+                }
             />
             <CardMedia>
                         {error ? <Typography>Wystąpił błąd: {error}</Typography>

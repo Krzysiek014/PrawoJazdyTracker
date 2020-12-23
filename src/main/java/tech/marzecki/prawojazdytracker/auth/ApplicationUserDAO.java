@@ -7,6 +7,8 @@ public interface ApplicationUserDAO {
 
     Optional<ApplicationUser> selectApplicationUserByUsername(String username);
 
+    Optional<UUID> findUserByUsername(String username);
+
     int registerUser(UUID id, String username, String password);
 
     default int registerUser(String username, String password){

@@ -2,13 +2,12 @@ package tech.marzecki.prawojazdytracker.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 import tech.marzecki.prawojazdytracker.auth.ApplicationUser;
 import tech.marzecki.prawojazdytracker.auth.ApplicationUserDetailsService;
+
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/userApi")
@@ -32,5 +31,10 @@ public class UserApiController {
         final ApplicationUser auth = (ApplicationUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         applicationUserDetailsService.removeUser(auth.getId());
         return new RedirectView("/website/login/index.html?status=delete");
+    }
+
+    @GetMapping("/findUser/{name}")
+    public UUID findUser(@PathVariable("name") String name){
+        return applicationUserDetailsService.findUserByUsername(name);
     }
 }

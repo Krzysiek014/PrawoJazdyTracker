@@ -41,6 +41,13 @@ public class PostgresApplicationUserDAOService implements ApplicationUserDAO{
     }
 
     @Override
+    public Optional<UUID> findUserByUsername(String username) {
+        String query = String.format("SELECT id FROM users WHERE username = '%s';", username);
+        List<UUID> userUUID = jdbcTemplate.query(query, (resultSet,i) -> UUID.fromString(resultSet.getString("id")));
+        return userUUID.stream().findFirst();
+    }
+
+    @Override
     public int registerUser(UUID id, String username, String password) {
         String query = String.format("INSERT INTO users VALUES('%s', 'DRIVER', '%s', '%s', true, true, true, true)", id.toString(), username, passwordEncoder.encode(password));
         jdbcTemplate.update(query);

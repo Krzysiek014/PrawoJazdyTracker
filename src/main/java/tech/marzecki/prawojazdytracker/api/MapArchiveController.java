@@ -11,6 +11,7 @@ import tech.marzecki.prawojazdytracker.service.LessonMapPositionService;
 import tech.marzecki.prawojazdytracker.service.LessonService;
 
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
 
@@ -18,11 +19,13 @@ import java.util.UUID;
 @RequestMapping("/map")
 public class MapArchiveController {
 
+    final UserApiController userApiController;
     final LessonService lessonService;
     final LessonMapPositionService lessonMapPositionService;
 
     @Autowired
-    public MapArchiveController(LessonService lessonService, LessonMapPositionService lessonMapPositionService) {
+    public MapArchiveController(UserApiController userApiController, LessonService lessonService, LessonMapPositionService lessonMapPositionService) {
+        this.userApiController = userApiController;
         this.lessonService = lessonService;
         this.lessonMapPositionService = lessonMapPositionService;
     }
@@ -34,9 +37,10 @@ public class MapArchiveController {
         return lessonService.getAllDriversLessons(auth.getId());
     }
 
-    @GetMapping("lessons/{id}")
-    public List<Lesson> getOtherUsersLessons(@PathVariable("id") String id){
-        return lessonService.getAllDriversLessons(UUID.fromString(id));
+    @GetMapping("lessons/{name}")
+    public List<Lesson> getOtherUsersLessons(@PathVariable("name") String name){
+        UUID userID = userApiController.findUser(name);
+        return userID!=null ? lessonService.getAllDriversLessons(userID) : new LinkedList();
     }
 
     @PostMapping("/add")

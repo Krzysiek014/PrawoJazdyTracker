@@ -8,6 +8,7 @@ import * as serviceWorker from './serviceWorker';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import Settings from './Settings';
 import LessonShare from './LessonShare';
+import Profile from './Profile';
 
 
 ReactDOM.render(
@@ -19,6 +20,7 @@ ReactDOM.render(
       <Route path="/website/home" component={HomePage}/>
       <Route path="/website/settings" component={Settings}/>
       <Route path="/website/lesson/" component={LessonShare}/>
+      <Route path="/website/profile/" component={Profile}/>
     </Switch>
   </BrowserRouter>),
   document.getElementById('root')

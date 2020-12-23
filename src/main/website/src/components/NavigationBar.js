@@ -11,7 +11,7 @@ import car from './../car.png';
 
 const searchUrl = ((event) =>{
     if(event.keyCode === 13)
-        window.location = 'http://localhost:8080/website/user/' + document.querySelector('#standard-basic').value;
+        window.location = 'http://localhost:8080/website/profile/index.html?name=' + document.querySelector('#standard-basic').value;
 });
 
 const SearchTextField = withStyles({

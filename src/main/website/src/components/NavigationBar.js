@@ -5,8 +5,45 @@ import Typography from '@material-ui/core/Typography';
 import LoginIcon from '@material-ui/icons/VpnKeyRounded';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import Button from '@material-ui/core/Button';
+import withStyles from '@material-ui/core/styles/withStyles';
+import TextField from '@material-ui/core/TextField';
 import car from './../car.png';
 
+const searchUrl = ((event) =>{
+    if(event.keyCode === 13)
+        window.location = 'http://localhost:8080/website/user/' + document.querySelector('#standard-basic').value;
+});
+
+const SearchTextField = withStyles({
+    root: {
+      '& label.Mui-focused': {
+        color: 'white',
+      },
+      '& .MuiInput-underline:after': {
+        borderBottomColor: 'white',
+      },
+      '& .MuiOutlinedInput-root': {
+        '& fieldset': {
+          borderColor: 'white',
+        },
+        '&:hover fieldset': {
+          borderColor: 'white',
+        },
+        '&.Mui-focused fieldset': {
+          borderColor: 'white',
+        }
+      },
+      "& .MuiInputBase-input": {
+          color: 'white'
+      },
+      "& .MuiInput-underline:before": {
+          borderColor: 'white',
+      },
+      "& .MuiFormLabel-root": {
+          color: 'white',
+      }
+    },
+  })(TextField);
 
 const NavigationBar = ({firstTime}) => {
     if(firstTime){
@@ -36,9 +73,10 @@ const NavigationBar = ({firstTime}) => {
                 <AppBar position='static'>
                     <ToolBar>
                         <img src={car} style={{height: '20px', filter: 'brightness(0) invert(1)', marginRight: '20px'}}></img>
-                        <Typography variant='h5' style={{flexGrow: 1}}>
+                        <Typography variant='h5'>
                             Prawo Jazdy Tracker
                         </Typography>
+                        <SearchTextField id="standard-basic" onKeyUp={searchUrl} className='searchBox' label="Wyszukaj" style={{flexGrow: 1, margin: '0 20vw 0 10vw'}}/>
                         <ButtonGroup color="primary" aria-label="secondary button group">
                             <Button variant='contained' href="/website/settings/index.html">
                                 Ustawienia

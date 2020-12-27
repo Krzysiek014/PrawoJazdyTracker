@@ -37,4 +37,8 @@ public class VoteService {
     public List<Vote> getVotesByUser(UUID driverID){
         return voteDAO.getVotesByUser(driverID);
     }
+
+    public Boolean removeAllVotesOfUser(UUID driverID){
+        return voteDAO.removeAllVotesOfUser(driverID);
+    }
 }

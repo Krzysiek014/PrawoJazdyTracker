@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 import tech.marzecki.prawojazdytracker.auth.ApplicationUser;
 import tech.marzecki.prawojazdytracker.auth.ApplicationUserDetailsService;
+import tech.marzecki.prawojazdytracker.service.VoteService;
 
 import java.util.UUID;
 
@@ -14,10 +15,12 @@ import java.util.UUID;
 public class UserApiController {
 
     final ApplicationUserDetailsService applicationUserDetailsService;
+    final VoteService voteService;
 
     @Autowired
-    public UserApiController(ApplicationUserDetailsService applicationUserDetailsService){
+    public UserApiController(ApplicationUserDetailsService applicationUserDetailsService, VoteService voteService){
         this.applicationUserDetailsService = applicationUserDetailsService;
+        this.voteService = voteService;
     }
 
     @PostMapping("/register")
@@ -29,6 +32,7 @@ public class UserApiController {
     @GetMapping("/deleteAccount")
     public RedirectView removeUser(){
         final ApplicationUser auth = (ApplicationUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        voteService.removeAllVotesOfUser(auth.getId());
         applicationUserDetailsService.removeUser(auth.getId());
         return new RedirectView("/website/login/index.html?status=delete");
     }

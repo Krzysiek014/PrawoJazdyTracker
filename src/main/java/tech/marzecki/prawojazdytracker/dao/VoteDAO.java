@@ -17,4 +17,6 @@ public interface VoteDAO {
 
     List<Vote> getVotesByUser(UUID driverID);
 
+    Boolean removeAllVotesOfUser(UUID driverID);
+
 }

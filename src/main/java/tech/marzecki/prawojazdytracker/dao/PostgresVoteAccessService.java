@@ -72,4 +72,11 @@ public class PostgresVoteAccessService implements VoteDAO{
         );
         return result;
     }
+
+    @Override
+    public Boolean removeAllVotesOfUser(UUID driverID) {
+        String query = String.format("DELETE FROM votes WHERE userid = '%s'", driverID);
+        jdbcTemplate.update(query);
+        return true;
+    }
 }

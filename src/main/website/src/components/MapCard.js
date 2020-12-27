@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardMedia from '@material-ui/core/CardMedia';
-import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
 import IconButton from '@material-ui/core/IconButton';
 import FavoriteIcon from '@material-ui/icons/Favorite';
@@ -12,19 +11,17 @@ import { makeStyles } from "@material-ui/core/styles";
 import CircularProgress from '@material-ui/core/CircularProgress'
 import { Typography } from '@material-ui/core';
 import {MapContainer ,TileLayer, Marker, Popup, Polyline } from 'react-leaflet';
-import { SettingsRemote } from '@material-ui/icons';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import TextField from "@material-ui/core/TextField";
+import Badge from '@material-ui/core/Badge';
 
-// const position = [52.25, 21.00]
 const useStyles = makeStyles((theme) => ({
     map: {
         width: "600px",
@@ -39,6 +36,7 @@ const useStyles = makeStyles((theme) => ({
         width: '550px'
     },
   }));
+
 const MapCardContainer = ({id, name, date, owner}) => {
    const classes = useStyles();
    const [data, setData] = useState(null)
@@ -47,7 +45,14 @@ const MapCardContainer = ({id, name, date, owner}) => {
    const [error, setError] = useState(null)
    const [anchorEl, setAnchorEl] = React.useState(null);
    const [share, setShare] = React.useState(null);
+   const [favNumber, setFav] = useState(null);
+   const [heartColor, setHeartColor] = useState(null);
   
+
+   const formData = new FormData();
+   formData.append('lessonID', id);
+
+
    const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
     };
@@ -69,11 +74,46 @@ const MapCardContainer = ({id, name, date, owner}) => {
         setShare(false);
     };
 
+    const vote = () => {
+        fetch('/voteApi/changeVote', {
+            method: 'POST',
+            body: formData
+        }).then(response => response.json())
+        .then(
+            (result) => {
+                setHeartColor(result ? 'red' : 'rgba(0, 0, 0, 0.54)');
+                setFav(result ? favNumber+1 : favNumber-1);
+            }
+        );
+    }
+
    useEffect(() => {
      fetch("/map/lesson/" + id + "/points")
      .then(res => res.json())
      .then(
        (result) => {
+            fetch('/voteApi/getAllVotes',{
+                method: 'POST',
+                body: formData
+            })
+            .then(votes => votes.json())
+            .then(
+                (votes) =>{
+                    setFav(votes.length); 
+                }
+            );
+        
+            fetch('/voteApi/doVoted',{
+                method: 'POST',
+                body: formData
+            })
+            .then(vote => vote.json())
+            .then(
+                (vote) =>{
+                    setHeartColor(vote ? 'red' : 'rgba(0, 0, 0, 0.54)');
+                }
+            );
+
            const position = [0,0];
            const route = [];
            for (let i = 0; i < result.length - 1; i++) {
@@ -143,7 +183,9 @@ const MapCardContainer = ({id, name, date, owner}) => {
             </CardMedia>
             <CardActions disableSpacing>
                 <IconButton aria-label="add to favorites">
-                    <FavoriteIcon />
+                    <Badge badgeContent={favNumber} color="primary">
+                        <FavoriteIcon id={"vote"+id} onClick={vote} style={{color: heartColor}}/>
+                    </Badge>
                 </IconButton>
                 <IconButton aria-label="share">
                     <ShareIcon onClick={shareOpen}/>

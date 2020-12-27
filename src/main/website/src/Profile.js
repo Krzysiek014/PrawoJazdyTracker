@@ -49,13 +49,19 @@ function Profile() {
           <Grid container spacing={2}>
             {error ? <Typography>Wystąpił błąd: {error}</Typography>
             : loading ? <CircularProgress />
-              : data.map(i =>(
+            : data.length>0 ?
+              data.map(i =>(
                 <Grid item>
                   <Paper>
                     <MapCardContainer owner={false} id={i.id} name={i.name} date={moment(new Date(i.date)).format('DD.MM.YYYY')}></MapCardContainer>
                   </Paper>
                 </Grid>
                 ))
+              : <Grid item>
+                <Paper style={{width: '60vw', height: '50vh', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+                  <Typography variant='h4'>Ten użytkownik jeszcze nie ma żadnych zarejestrowanych lekcji</Typography>
+                </Paper>
+              </Grid>
             }
           </Grid>
         </Grid>

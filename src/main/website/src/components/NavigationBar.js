@@ -8,6 +8,7 @@ import Button from '@material-ui/core/Button';
 import withStyles from '@material-ui/core/styles/withStyles';
 import TextField from '@material-ui/core/TextField';
 import car from './../car.png';
+import SearchIcon from '@material-ui/icons/Search'
 
 const searchUrl = ((event) =>{
     if(event.keyCode === 13)
@@ -76,7 +77,9 @@ const NavigationBar = ({firstTime}) => {
                         <Typography variant='h5'>
                             Prawo Jazdy Tracker
                         </Typography>
-                        <SearchTextField id="standard-basic" onKeyUp={searchUrl} className='searchBox' label="Wyszukaj" style={{flexGrow: 1, margin: '0 20vw 0 10vw'}}/>
+                        <SearchTextField id="standard-basic" onKeyUp={searchUrl} label='Wyszukaj...' className='searchBox' style={{flexGrow: 1, margin: '0 20vw 0 10vw'}}>
+                            <SearchIcon />
+                        </SearchTextField>
                         <ButtonGroup color="primary" aria-label="secondary button group">
                             <Button variant='contained' href="/website/settings/index.html">
                                 Ustawienia

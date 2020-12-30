@@ -8,7 +8,7 @@ import Paper from '@material-ui/core/Paper';
 import CircularProgress from '@material-ui/core/CircularProgress'
 import MapCardContainer from './components/MapCard';
 import { makeStyles } from "@material-ui/core/styles";
-import { Typography } from '@material-ui/core';
+import { Avatar, Typography } from '@material-ui/core';
 import moment from 'moment';
 
 const useStyles = makeStyles((theme) => ({
@@ -47,6 +47,10 @@ function Profile() {
         </Grid>
         <Grid item xs={10}>
           <Grid container spacing={2}>
+            <Paper style={{width: '60vw', height: '20vh', display: 'flex', alignItems: 'center', paddingLeft: '40px'}}>
+              <Avatar style={{height: '150px', width: '150px', fontSize: '70px'}}>{new URLSearchParams(window.location.search).get('name').substring(0,2)}</Avatar>
+              <Typography variant='h4' style={{paddingLeft: '10px'}}>{new URLSearchParams(window.location.search).get('name')}</Typography>
+            </Paper>
             {error ? <Typography>Wystąpił błąd: {error}</Typography>
             : loading ? <CircularProgress />
             : data.length>0 ?

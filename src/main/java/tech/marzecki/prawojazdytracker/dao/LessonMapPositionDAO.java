@@ -15,4 +15,6 @@ public interface LessonMapPositionDAO {
     };
 
     List<LessonMapPosition> getLessonMapPoints(UUID lessonId);
+
+    Boolean deleteAllLessonPoints(UUID lessonID);
 }

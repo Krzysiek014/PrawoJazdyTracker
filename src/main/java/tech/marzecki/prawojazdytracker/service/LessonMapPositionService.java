@@ -25,4 +25,8 @@ public class LessonMapPositionService {
     public List<LessonMapPosition> getLessonMapPoints(UUID lessonId){
         return  lessonMapPositionDAO.getLessonMapPoints(lessonId);
     }
+
+    public Boolean deleteAllLessonPoints(UUID lessonID){
+        return lessonMapPositionDAO.deleteAllLessonPoints(lessonID);
+    }
 }

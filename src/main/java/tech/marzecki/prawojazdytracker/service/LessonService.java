@@ -25,6 +25,7 @@ public class LessonService {
     }
 
     public int deleteLesson(UUID lessonId){
+
         return lessonDAO.deleteLesson(lessonId);
     }
 

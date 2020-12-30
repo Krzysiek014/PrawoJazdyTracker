@@ -40,4 +40,11 @@ public class PostgresLessonMapPositionAccessService implements LessonMapPosition
             return new LessonMapPosition(resultSet.getFloat("longitude"), resultSet.getFloat("latitude"), UUID.fromString(resultSet.getString("id")), UUID.fromString(resultSet.getString("lessonId")), time);
         });
     }
+
+    @Override
+    public Boolean deleteAllLessonPoints(UUID lessonID) {
+        final String query = String.format("DELETE FROM lessonmapposition WHERE lessonid = '%s'", lessonID.toString());
+        jdbcTemplate.update(query);
+        return true;
+    }
 }

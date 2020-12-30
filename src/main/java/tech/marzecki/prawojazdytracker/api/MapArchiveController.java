@@ -68,12 +68,17 @@ public class MapArchiveController {
 
     @GetMapping("/lesson/delete/{id}")
     public int deleteUsersLesson(@PathVariable("id") String id){
+        lessonMapPositionService.deleteAllLessonPoints(UUID.fromString(id));
         return lessonService.deleteLesson(UUID.fromString(id));
     }
 
     @GetMapping("/lesson/deleteAll")
     public RedirectView deleteAllLessons(){
         final ApplicationUser auth = (ApplicationUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        for (Lesson l:lessonService.getAllDriversLessons(auth.getId()))
+            lessonMapPositionService.deleteAllLessonPoints(l.getId());
+
         lessonService.deleteAllLessons(auth.getId());
         return new RedirectView("/website/home/index.html?status=deleteAll");
     }

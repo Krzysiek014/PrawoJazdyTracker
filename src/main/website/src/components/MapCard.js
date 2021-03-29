@@ -174,9 +174,7 @@ const MapCardContainer = ({id, name, date, owner}) => {
                                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                                 />
                                 {data.map((result, index) => {
-                                        // return <Polyline key={index} positions={result} color={rgb(index*256/(data.length-1),256-index*256/(data.length-1),0)} />
                                         return <Polyline key={index} positions={result} color={'rgb(' + (index*255/(data.length-1)) + ',' + (255-index*255/(data.length-1)) + ',0)'} />
-                                    // : null
                                 })}
                         </MapContainer>
                         }

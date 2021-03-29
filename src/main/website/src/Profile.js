@@ -27,14 +27,24 @@ function Profile() {
   const [error, setError] = useState(null)
 
   useEffect(() => {
-    fetch("/map/lessons/" + new URLSearchParams(window.location.search).get('name'))
-    .then(res => res.json())
+    fetch("/userApi/findUser/" + new URLSearchParams(window.location.search).get('name'))
     .then(
-      (result) => {
-          setData(result);
+      (r) => {
+        console.log(r)
+        if(r){
+          fetch("/map/lessons/" + new URLSearchParams(window.location.search).get('name'))
+          .then(res => res.json())
+          .then(
+            (result) => {
+                setData(result);
+            }
+          ).catch(e => setError(e))
+          .finally(() => setLoading(false))
+        }else{
+          setData('a');
+        }
       }
-    ).catch(e => setError(e))
-    .finally(() => setLoading(false))
+    )
   }, [])
 
   return (
@@ -47,25 +57,34 @@ function Profile() {
         </Grid>
         <Grid item xs={10}>
           <Grid container spacing={2}>
+            {data ?
             <Paper style={{width: '60vw', height: '20vh', display: 'flex', alignItems: 'center', paddingLeft: '40px'}}>
               <Avatar style={{height: '150px', width: '150px', fontSize: '70px'}}>{new URLSearchParams(window.location.search).get('name').substring(0,2)}</Avatar>
               <Typography variant='h4' style={{paddingLeft: '10px'}}>{new URLSearchParams(window.location.search).get('name')}</Typography>
             </Paper>
+            : ''
+            }
             {error ? <Typography>Wystąpił błąd: {error}</Typography>
             : loading ? <CircularProgress />
-            : data.length>0 ?
-              data.map(i =>(
-                <Grid item>
-                  <Paper>
-                    <MapCardContainer owner={false} id={i.id} name={i.name} date={moment(new Date(i.date)).format('DD.MM.YYYY')}></MapCardContainer>
+            : data != 'a' ?
+              data.length>0 ?
+                data.map(i =>(
+                  <Grid item>
+                    <Paper>
+                      <MapCardContainer owner={false} id={i.id} name={i.name} date={moment(new Date(i.date)).format('DD.MM.YYYY')}></MapCardContainer>
+                    </Paper>
+                  </Grid>
+                  ))
+                : <Grid item>
+                  <Paper style={{width: '60vw', height: '50vh', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+                    <Typography variant='h4'>Ten użytkownik jeszcze nie ma żadnych zarejestrowanych lekcji</Typography>
                   </Paper>
                 </Grid>
-                ))
               : <Grid item>
-                <Paper style={{width: '60vw', height: '50vh', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
-                  <Typography variant='h4'>Ten użytkownik jeszcze nie ma żadnych zarejestrowanych lekcji</Typography>
-                </Paper>
-              </Grid>
+                  <Paper style={{width: '60vw', height: '50vh', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+                    <Typography variant='h4'>Nie ma takiego użytkownika</Typography>
+                  </Paper>
+                </Grid>
             }
           </Grid>
         </Grid>
